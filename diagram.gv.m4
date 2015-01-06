@@ -1,42 +1,35 @@
 digraph Processes {
   node [shape = box, style=rounded, width=0, height=0, fontsize=10, margin=0.04, fillcolor=black];
-  edge [fontsize=8, arrowhead=open];
+  edge [fontsize=8, arrowhead=open, overlap=false;];
   graph [margin=1, layout=dot, fontsize=10];
 
   initial_node(start1);
   n6 [rep(report issue)];
-  refine [rep(refine/update issue)];
   n7 [dev(review/annotate/contextualize issue)];
-  fork_node(fork1);
 
-  start1 -> n6 -> n7 -> fork1;
-  refine -> n7;
+  start1 -> n6 -> n7;
        
+  n9 [ntac(assess issue)];
+  n7 -> n9;
+  
+  decision_node(ntac_decision);
+  n9 -> ntac_decision;
 
-  n9 [ntac(assess technical aspects)];
-  n16 [ntacm(update issues/comment)];
-  issue_ntac_go [decision_node_attrs, ntac(artifact needed?)];
   final_node(issue_ntac_final);
 
-  fork1 -> n9 -> n16 -> issue_ntac_go;
-  issue_ntac_go -> issue_ntac_final [option(no)];
+  ntac_decision -> issue_ntac_final [option(artifact\nnot needed)];
+  ntac_decision -> request [option(additional\ninfo needed)];
+  refine [rep(refine/update issue)];
+  refine -> n7 [weight=0];
+  { rank=same; ntac_decision; request; }
+  
+  request [dev(request more info)];
 
-  n8 [nbac(assess business aspects)];
-  n17 [nbacm(update issues/comment)];
-  issue_nbac_go [decision_node_attrs, nbac(artifact needed?)];
-  final_node(issue_nbac_final);
-
-  fork1 -> n8 -> n17 -> issue_nbac_go;
-  issue_nbac_go -> issue_nbac_final [option(no)];
-
-  join_node(join1);
-
-
-  { issue_ntac_go issue_nbac_go } -> join1 [option(yes)];
+  request -> refine;
 
   n1 [dev(draft/update/generate artifacts)];
 
-  join1 -> n1;
+  ntac_decision -> n1 [option(artifact\nneeded)];
 
   n10 [dev(brief to NTAC)];
   n2 [dev(integrate changes)];

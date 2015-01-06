@@ -11,4 +11,5 @@ m4_define(final_node,[[[$1 [label="", width=0.15, height=0.15, fixedsize=shape, 
 m4_define(fork_node,[[[$1 [label="", shape=box, style=filled, fixedsize=shape, width=1, height=0.05, fillcolor=black]]]])m4_dnl
 m4_define(join_node,[[[fork_node($1)]]])m4_dnl
 m4_define(decision_node_attrs,[[[shape=diamond, style=solid, margin=0]]])m4_dnl
+m4_define(decision_node,[[[$1 [label="", width=0.5, height=0.25, fixedsize=shape, decision_node_attrs]]]])m4_dnl
 m4_define(option,[[[label="  [$1]"]]])m4_dnl
