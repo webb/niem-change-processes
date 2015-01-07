@@ -1,23 +1,27 @@
-digraph Processes {
+digraph G {
   node [shape = box, style=rounded, width=0, height=0, fontsize=10, margin=0.04, fillcolor=black];
   edge [fontsize=8, arrowhead=open, overlap=false;];
-  graph [margin=1, layout=dot, fontsize=10];
+  graph [layout=dot, fontsize=10];
 
   initial_node(start1);
   n6 [rep(report issue)];
   n7 [dev(review/annotate/contextualize issue)];
-
-  start1 -> n6 -> n7;
+  assign [dev(assign issue)];
+  decision_node(decide_assignment);
+  start1 -> n6 -> n7 -> assign -> decide_assignment;
        
-  n9 [ntac(assess issue)];
-  n7 -> n9;
+  ntac_assess [ntac(assess issue), URL="[[[ntac-assess-issue.html]]]"];
+  decide_assignment:w -> ntac_assess [option([[[NTAC issue]]])];
+
+  nbac_assess [nbac(assess issue)];
+  decide_assignment -> nbac_assess [option([[[NBAC issue]]])];
   
   decision_node(ntac_decision);
-  n9 -> ntac_decision;
+  ntac_assess -> ntac_decision;
 
   final_node(issue_ntac_final);
 
-  ntac_decision -> issue_ntac_final [option(artifact\nnot needed)];
+  ntac_decision:w -> issue_ntac_final [option(artifact\nnot needed)];
   ntac_decision -> request [option(additional\ninfo needed)];
   refine [rep(refine/update issue)];
   refine -> n7 [weight=0];
