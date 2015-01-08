@@ -3,7 +3,7 @@ env: PACKAGE_NAME=niem-change-processes ZIP_FILE=tmp/${PACKAGE_NAME}-${TRAVIS_TA
 install:
   - sudo apt-get --verbose-versions update
   - sudo apt-get --verbose-versions remove libxdot4 libgvc5 libgraph4 libcgraph5 libcdt4 libpathplan4
-  - sudo apt-get --verbose-versions install libdevil1c2 libgts-0.7-5 liblasi0 freeglut3 libglade2-0 libgtkglext1 
+  - sudo apt-get --verbose-versions install libdevil1c2 libgts-0.7-5 liblasi0 freeglut3 libglade2-0 libgtkglext1
   - curl -o libgraphviz.deb http://www.graphviz.org/pub/graphviz/stable/ubuntu/ub12.04/x86_64/libgraphviz4_2.38.0-1~precise_amd64.deb
   - sudo dpkg --force-conflicts -i libgraphviz.deb
   - curl -o graphviz.deb http://www.graphviz.org/pub/graphviz/stable/ubuntu/ub12.04/x86_64/graphviz_2.38.0-1~precise_amd64.deb
@@ -12,7 +12,7 @@ script: make ${ZIP_FILE}
 deploy:
   provider: releases
   api_key:
-    secure: COmIr4OXZcI2WV15+TLx4+VrIC7v9uen/aKG+W1dq8GgXVBWu9NYXxnPowDaUNd04IcZwvzNK4uBW7YW2q9WFO6yUHnlbsFM33fB8UTVONNcKL+mZl+pnFZqLZbxdA5NFXwb0crcfMu5bZKKo/llh3RhVJhthxSSLW2e4MwprXc=
+    secure: "tvGEUhqT4lzm1Q6QRqDyQ+ZQ/9YSjsIjJsphlC2obtvcY3NUDEm33jyIxJpBesNWgtiq6/ZOm7sBjJJV9ymo3RwrVOcNBgWBJAl4Vc0Gun5p9t9BclL9bz7fS/G/YBK+HVsNGypF47wKXCmJldl477rkts8h2Pk9KJzmhSOksTo="
   file: ${ZIP_FILE}
   skip_cleanup: true
   on:
