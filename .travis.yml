@@ -12,7 +12,7 @@ script: make ${ZIP_FILE}
 deploy:
   provider: releases
   api_key:
-    secure: "tvGEUhqT4lzm1Q6QRqDyQ+ZQ/9YSjsIjJsphlC2obtvcY3NUDEm33jyIxJpBesNWgtiq6/ZOm7sBjJJV9ymo3RwrVOcNBgWBJAl4Vc0Gun5p9t9BclL9bz7fS/G/YBK+HVsNGypF47wKXCmJldl477rkts8h2Pk9KJzmhSOksTo="
+    secure: "dMFDMnRBc27CvQhCaYbSmmG1NG/f9l/DfDCgm14bGQCoo5LEVNnYtQQ3CyJrNSDE7Nbuc5c2w5X2CyPF2GFg+eLorYcaAtCHOLryQs5gJhknyYmUJzUwM90qo1naTmQhLpagc485zpgZqMVfpd18VCFaw+8kDL6eWk7sdgBl7gI="
   file: ${ZIP_FILE}
   skip_cleanup: true
   on:
