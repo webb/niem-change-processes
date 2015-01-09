@@ -1,4 +1,4 @@
-language: c
+glanguage: c
 env: PACKAGE_NAME=niem-change-processes ZIP_FILE=${PACKAGE_NAME}-${TRAVIS_TAG}.zip
 install:
   - sudo apt-get --verbose-versions update

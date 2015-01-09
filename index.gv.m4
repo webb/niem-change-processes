@@ -6,25 +6,28 @@ digraph G {
   initial_node(start1);
   n6 [rep(report issue)];
   n7 [dev(review/annotate/contextualize issue)];
-  assign [dev(assign issue)];
+  assign [label="lead developer, NTAC & NBAC chairs, PMO:\nassign issue"];
   decision_node(decide_assignment);
   start1 -> n6 -> n7 -> assign -> decide_assignment;
+
+  /////////////////////////////////////////////////////////////////////////////
+  // NTAC issue
        
   ntac_assess [ntac(assess issue), URL="[[[ntac-assess-issue.html]]]"];
-  decide_assignment:w -> ntac_assess [option([[[NTAC issue]]])];
+  decide_assignment -> ntac_assess [option([[[NTAC issue]]])];
 
-  nbac_assess [nbac(assess issue)];
-  decide_assignment -> nbac_assess [option([[[NBAC issue]]])];
-  
   decision_node(ntac_decision);
   ntac_assess -> ntac_decision;
 
   final_node(issue_ntac_final);
 
-  ntac_decision:w -> issue_ntac_final [option(artifact\nnot needed)];
+  ntac_decision -> issue_ntac_final [option(artifact\nnot needed)];
   ntac_decision -> request [option(additional\ninfo needed)];
   refine [rep(refine/update issue)];
-  refine -> n7 [weight=0];
+  ntac_dev_review_issue [dev(review/annotate issue)];
+  
+  refine -> ntac_dev_review_issue;
+  ntac_dev_review_issue -> ntac_assess [weight = 0];
   { rank=same; ntac_decision; request; }
   
   request [dev(request more info)];
@@ -54,4 +57,19 @@ digraph G {
   n11 -> n4 [option(no), weight = 0];
   n4 -> n5 -> n2 -> n3;
   n3 -> n1 [weight = 0];
+
+
+  /////////////////////////////////////////////////////////////////////////////
+  // Other issue
+
+  nbac_assess [nbac(assess issue)];
+  decide_assignment -> nbac_assess [option([[[NBAC issue]]])];
+
+  pmo_assess [pmo(assess issue)];
+  decide_assignment -> pmo_assess [option([[[PMO issue]]])];
+
+  domain_assess [m_domain(assess issue)];
+  decide_assignment -> domain_assess [option([[[domain issue]]])];
+  
+
 }

@@ -6,7 +6,7 @@ endif
 ifdef TRAVIS_TAG
 RESULTS_NAME = $(PACKAGE_NAME)-$(TRAVIS_TAG)
 else
-RESULTS_NAME = $(PACKAGE_NAME)
+RESULTS_NAME = $(PACKAGE_NAME)-latest
 endif
 
 zip_file = $(RESULTS_NAME).zip
@@ -33,6 +33,8 @@ svg: $(images_svg)
 all: svg pdf
 
 pdf: $(images_pdf)
+
+html: $(pages_html)
 
 tmp/$(RESULTS_NAME)/%.html: tmp/%.map tmp/%.svg.base64 generic.html.m4
 	mkdir -p $(dir $@)
