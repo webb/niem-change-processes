@@ -20,3 +20,4 @@ deploy:
     all_branches: true
 notifications:
   email: true
+
