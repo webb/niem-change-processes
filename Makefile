@@ -9,7 +9,7 @@ else
 RESULTS_NAME = $(PACKAGE_NAME)-latest
 endif
 
-zip_file = $(RESULTS_NAME).zip
+zip_file = tmp/$(RESULTS_NAME).zip
 zip_dir = tmp/$(RESULTS_NAME)
 
 sources = $(wildcard *.gv.m4)
@@ -25,7 +25,7 @@ zip: $(zip_file)
 
 $(zip_file): $(pages_html)
 	rm -f $@
-	cd tmp; zip -9r ../$(RESULTS_NAME).zip $(RESULTS_NAME)
+	cd tmp; zip -9r $(RESULTS_NAME).zip $(RESULTS_NAME)
 	chmod uog-w $@
 
 svg: $(images_svg)
