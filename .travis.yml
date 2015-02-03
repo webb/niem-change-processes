@@ -10,15 +10,15 @@ install:
 - sudo dpkg --force-conflicts -i libgraphviz.deb
 - curl -o graphviz.deb http://www.graphviz.org/pub/graphviz/stable/ubuntu/ub12.04/x86_64/graphviz_2.38.0-1~precise_amd64.deb
 - sudo dpkg -i graphviz.deb
-script: make ${ZIP_FILE}
+script: make zip ZIP_FILE=${ZIP_FILE}
 notifications:
   email: true
 deploy:
   provider: releases
   api_key:
-    secure: IqnIJh5THI+YFOdicLNirT7nCBh+QylSvLYi0F10NKitRXJsVfI/F8ePnx/kCudgu6xeihhF5UxCjfQGxxuULzmUsIGZfEkJz8NrrGu9f0SnHo+p0laYUdy492vQnr6UDmImsztMn8tycLzQa/cn76inDN/pJkYi18gL59RLsSY=
+    secure: H6xItUpBBqq6p6zzpwwqmEopqe2gOz4MBuIlprHquJ3met+NF3YCu5DzXhQyvIjzc6hjWnazC5sIOzJPlT6QTFVRW1mydTnWDCCUuqf4P7ElFABlZniTCNKdZavOTeFh9GomPSraYpB9/CEtCEQ/JNy9lhmlNPW6C0HRT+dI/Jo=
   file: ${ZIP_FILE}
   on:
     repo: webb/niem-change-processes
-    tags: true
     all_branches: true
+    tags: true
