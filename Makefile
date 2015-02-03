@@ -24,7 +24,7 @@ default: zip
 zip: $(zip_file)
 
 $(zip_file): $(pages_html)
-	rm -f $@ 
+	rm -f $@
 	cd tmp; zip -9r $(RESULTS_NAME).zip $(RESULTS_NAME)
 	chmod uog-w $@
 
