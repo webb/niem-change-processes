@@ -1,5 +1,5 @@
 glanguage: c
-env: PACKAGE_NAME=niem-change-processes ZIP_FILE=tmp/${PACKAGE_NAME}-${TRAVIS_TAG}.zip
+env: PACKAGE_NAME=niem-change-processes ZIP_FILE=${PACKAGE_NAME}-${TRAVIS_TAG}.zip
 install:
 - sudo apt-get --verbose-versions update
 - sudo apt-get --verbose-versions remove libxdot4 libgvc5 libgraph4 libcgraph5 libcdt4
@@ -10,7 +10,7 @@ install:
 - sudo dpkg --force-conflicts -i libgraphviz.deb
 - curl -o graphviz.deb http://www.graphviz.org/pub/graphviz/stable/ubuntu/ub12.04/x86_64/graphviz_2.38.0-1~precise_amd64.deb
 - sudo dpkg -i graphviz.deb
-script: make zip ZIP_FILE=${ZIP_FILE}
+script: make zip PACKAGE_NAME=${PACKAGE_NAME} TRAVIS_TAG=${TRAVIS_TAG} ZIP_FILE=${ZIP_FILE}
 notifications:
   email: true
 deploy:

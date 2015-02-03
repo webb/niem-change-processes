@@ -1,31 +1,29 @@
 
-ifndef PACKAGE_NAME
 PACKAGE_NAME = niem-change-processes
-endif
 
-ifdef TRAVIS_TAG
+ifeq ($(TRAVIS_TAG),)
+TRAVIS_TAG = latest
+endif
+TRAVIS_TAG = latest
+
 RESULTS_NAME = $(PACKAGE_NAME)-$(TRAVIS_TAG)
-else
-RESULTS_NAME = $(PACKAGE_NAME)-latest
-endif
-
-zip_file = tmp/$(RESULTS_NAME).zip
-zip_dir = tmp/$(RESULTS_NAME)
+ZIP_FILE = $(RESULTS_NAME).zip
+ZIP_DIR = tmp/$(RESULTS_NAME)
 
 sources = $(wildcard *.gv.m4)
 images_svg = $(patsubst %.gv.m4,%.svg,$(sources))
 images_pdf = $(patsubst %.gv.m4,%.pdf,$(sources))
-pages_html = $(patsubst %.gv.m4,$(zip_dir)/%.html,$(sources))
+pages_html = $(patsubst %.gv.m4,$(ZIP_DIR)/%.html,$(sources))
 
 .SECONDARY:
 
 default: zip
 
-zip: $(zip_file)
+zip: $(ZIP_FILE)
 
-$(zip_file): $(pages_html)
+$(ZIP_FILE): $(pages_html)
 	rm -f $@
-	cd tmp; zip -9r $(RESULTS_NAME).zip $(RESULTS_NAME)
+	cd $(dir $(ZIP_DIR)); zip -9r ../$(ZIP_FILE) $(notdir $(ZIP_DIR))
 	chmod uog-w $@
 
 svg: $(images_svg)
@@ -75,7 +73,6 @@ tmp/%.pdf: tmp/%.ps2
 
 clean:
 	rm -rf tmp
-	rm -f $(wildcard *~)
-
+	rm -f $(wildcard *~) $(ZIP_FILE)
 
 
