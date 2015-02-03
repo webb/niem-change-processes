@@ -1,4 +1,5 @@
 
+#
 ifndef PACKAGE_NAME
 PACKAGE_NAME = niem-change-processes
 endif
